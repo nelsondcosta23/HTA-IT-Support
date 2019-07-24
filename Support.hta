@@ -1,0 +1,848 @@
+<!DOCTYPE HTML>
+<html lang="pt">
+
+<head>
+<title>SCCS & SCCSTAR Support</title>
+<HTA:Application
+ ID = "HTA"
+ ApplicationName = "SCCS & SCCSTAR Suport"
+ Border = "thick"
+ BorderStyle = "normal"
+ Caption = "yes"
+ ContextMenu="no"
+ ICON="http://externo.soccsantos.pro/themes/default/images/favicon.ico"
+ InnerBorder="no"
+ MaximizeButton = "no"
+ MinimizeButton = "yes"
+ Navigable="yes"
+ Scroll="no"
+ SrollFlat="no"
+ Selection="yes"
+ ShowInTaskBar = "yes"
+ SingleInstance = "yes"
+ SysMenu = "yes"
+ Version = "1.6"
+ WindowState = "normal"
+>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- este meta dado desconfigura a resoulução e alguns dados <meta http-equiv="x-ua-compatible" content="ie=9" /> -->
+
+<!-- CSS -->
+<style type="text/css">
+/* LAYOUT DO CONTEUDO */
+.ASL {
+	font-family: Tahoma;
+	font-size: small;
+}
+.style1 {
+	color: #FFFFFF;
+	background-color: #000000;
+}
+.style2 {
+	color: #FFFFFF;
+	font-size: large;
+	background-color: #000000;
+	font-family: Tahoma;
+}
+.style3 {
+	color: #FFFFFF;
+	font-size: medium;
+	background-color: #000000;
+}
+
+
+/* LAYOUT DAS TABS */
+ body,td,th { font-family:Arial }
+.head { font-size:110%; font-weight:bold }
+.panel {
+  background-color: white;
+  border: solid 1px black;
+  height: 410px;
+  padding: 5px;
+  position: relative;
+  width: 650px;
+  z-index: 0;
+}
+.tabs {
+  border-collapse: collapse;
+  color: black;
+  cursor: pointer;
+  cursor: hand;
+  font-family: arial;
+  font-size: 9pt;
+  font-weight: bold;
+  margin-top: 4px;
+  padding: 2px 4px 0px 4px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  z-index: 1;
+}
+.tabs0 {
+  background-color: #f44336;
+  border: solid 1px black;
+}
+.tabs1 {
+  background-color: white;
+  border-color: black black white black;
+  border-style: solid solid solid solid;
+  border-width: 1px 1px 1px 1px;
+}
+
+
+/* Underline e Botões */
+a:link {
+  text-decoration: none;
+  color: #f44336;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #f44336;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #f44336;
+}
+
+a:active {
+  text-decoration: underline;
+  color: #f44336;
+}
+
+.button {
+  background-color: #4CAF50; /* verde */
+  border: none;
+  color: white;
+  padding: 3px 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  height: 35px;
+  width: 170px;
+  font-weight: bold;
+}
+
+.button5 {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+}
+
+.button5:hover {
+  background-color: #555555;
+  color: white;
+}
+
+.button1 {
+  background-color: #f44336;
+  color: black;
+  border: 2px solid white;
+}
+
+.button1:hover {
+  background-color: #f44336;
+  color: white;
+}
+</style>
+
+
+<!-- SCRIPT DAS TABS -->
+<script type="text/javascript">
+self.moveTo(0,0);
+self.resizeTo(1024,800);
+var panels = new Array("","panel1","panel2","panel3","panel4","panel5");
+function panel(tab) {
+    for (i=1; i<panels.length; i++) {
+        if (i == tab) {
+            document.getElementById("tab"+i).className = "tabs tabs1";
+            document.getElementById("panel"+i).style.display = "block";
+        } else {
+            document.getElementById("tab"+i).className = "tabs tabs0";
+            document.getElementById("panel"+i).style.display = "none";
+        }
+    }
+}
+</script>
+
+<!-- SCRIPT PARA GERAL, GRAB IP, MAC, PR E WINDOWS USER -->
+<script type="text/javascript">
+    function computername()
+		{
+        var wshShell = new ActiveXObject("WScript.Shell");
+        var sComputerName = wshShell.ExpandEnvironmentStrings("%COMPUTERNAME%");
+        return sComputerName
+		}
+   
+    function username()
+		{
+		var wshshell=new ActiveXObject("wscript.shell");
+		var username=wshshell.ExpandEnvironmentStrings("%username%");
+		return username
+		}
+
+	function ipAddress()
+		{
+		var ipAddress = "";
+		var wmi = GetObject("winmgmts:{impersonationLevel=impersonate}");
+		e = new Enumerator(wmi.ExecQuery("SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = True"));
+			for(; !e.atEnd(); e.moveNext()) {
+			var s = e.item(); 
+				ipAddress = s.IPAddress(0);
+				}
+			return ipAddress		
+			}
+
+	function macAddress() 
+		{
+		var macAddress = "";
+		var wmi = GetObject("winmgmts:{impersonationLevel=impersonate}");
+		e = new Enumerator(wmi.ExecQuery("SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = True"));
+			for(; !e.atEnd(); e.moveNext()) {
+				var s = e.item(); 
+					macAddress = s.MACAddress;
+					}
+				return macAddress		
+			}
+
+var cname = computername();
+var uname = username();
+var ip = ipAddress();
+var mac = macAddress();
+</script>
+
+<!-- LISTA DE LINKS, FORÇA O USO DO BROWSER PRÉDEFINIDO -->
+<script type="text/javascript">
+  function faq()
+  {
+      var shell = new ActiveXObject("WScript.Shell");
+      shell.run("https://faq.soccsantos.pro");
+  }
+  
+    function painelcrm()
+  {
+      var shell = new ActiveXObject("WScript.Shell");
+      shell.run("https://painel.soccsantos.pro");
+  }
+  
+    function tickets()
+  {
+      var shell = new ActiveXObject("WScript.Shell");
+      shell.run("https://cs-fs01/portal/");
+  }
+  
+    function externocrm()
+  {
+      var shell = new ActiveXObject("WScript.Shell");
+      shell.run("https://externo.soccsantos.pro");
+  }
+  
+    function faq_recuperar()
+  {
+      var shell = new ActiveXObject("WScript.Shell");
+      shell.run("https://faq.soccsantos.pro/index.php?action=faq&cat=13&id=68&artlang=pt&highlight=recuperar");
+  }
+  
+    function faq_impressoras()
+  {
+      var shell = new ActiveXObject("WScript.Shell");
+      shell.run("https://faq.soccsantos.pro/index.php?sid=24630&lang=pt&action=faq&cat=9&id=10&artlang=pt&highlight=como+instalar");
+  }
+  
+      function faq_excel()
+  {
+      var shell = new ActiveXObject("WScript.Shell");
+      shell.run("https://faq.soccsantos.pro/index.php?sid=24668&lang=pt&action=show&cat=7");
+  }
+  
+        function impressoras()
+  {
+      var shell = new ActiveXObject("WScript.Shell");
+      shell.run("file:///\\csappl3");
+  }
+</script>
+
+
+<!-- VBS -->
+<script Language = VBScript>
+On Error Resume Next
+	Sub Window_OnLoad
+		intWidth = 700
+		intHeight = 565
+		Me.ResizeTo intWidth, intHeight
+		Me.MoveTo ((Screen.Width / 2) - (intWidth / 2)),((Screen.Height / 2) - (intHeight / 2))
+		span_computername.innerHTML = GetComputerName()
+		span_logonserver.innerHTML = GetLogonServer()
+		span_Bios.innerHTML = GetBios()
+		'span_IEVersion.innerHTML = GetIE()
+		strIPInfo = GetIPInformation()
+		If InStr(strIPInfo, ";") > 0 Then
+			arrIPInfo = Split(strIPInfo, ";")
+			If UBound(arrIPInfo) >= 3 Then
+				span_ipaddress.InnerHTML = arrIPInfo(0)
+				span_subnetmask.InnerHTML = arrIPInfo(1)
+				span_defaultgateway.InnerHTML = arrIPInfo(2)
+				span_primarydns.InnerHTML = arrIPInfo(3)
+				If UBound(arrIPInfo) = 4 Then
+					'span_secondarydns.InnerHTML = arrIPInfo(4)
+				End If
+			End If
+		End If
+		'span_OS.innerHTML = GetOS()
+		span_Dominio.innerHTML = GetDomain()
+		span_PCType.InnerHTML = GetChassitype()
+		
+	End Sub
+ 
+	Function GetComputerName()
+		Set objNetwork = CreateObject("WScript.Network")
+		GetComputerName = objNetwork.ComputerName
+	End Function
+ 
+	Function GetLogonServer()
+		Dim WSHShell,strRegKey 
+		Set WSHShell = CreateObject("WScript.Shell") 
+		strRegKey="HKCU\Volatile Environment\LogonServer" 
+		GetLogonServer = WSHShell.RegRead(strRegKey) 
+	End Function
+ 
+	Function GetLocation()
+		On error resume next
+		Set objADSysInfo = CreateObject("ADSystemInfo")
+		Set objComputer = GetObject("LDAP://" & objADSysInfo.Computername)
+		GetLocation = objComputer.Location
+	End Function
+ 
+	Function GetIPInformation()
+		strComputer = "."
+		Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\cimv2")
+		Set colNetAdapters = objWMIService.ExecQuery _
+			("Select * from Win32_NetworkAdapterConfiguration Where IPEnabled=True")
+		strDetails = ""
+		For Each objAdapter In colNetAdapters
+			If IsNull(objAdapter.IPAddress) = False And IsNull(objAdapter.DefaultIPGateway) = False Then
+				If Join(objAdapter.IPAddress) <> "0.0.0.0" Then
+					If strDetails = "" Then
+						strDetails = Join(objAdapter.IPAddress) & ";"
+						strDetails = strDetails & Join(objAdapter.IPSubnet) & ";"
+						strDetails = strDetails & Join(objAdapter.DefaultIPGateway) & ";"
+						strDetails = strDetails & Join(objAdapter.DNSServerSearchOrder, ";")
+					End If
+				End If
+			End If
+		Next
+		GetIPInformation = strDetails
+	End Function
+ 
+    Function GetBios()
+	'WriteLog "Getting WMI data from Win32_BIOS"
+	strComputer = "."
+	Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\cimv2")
+	Set BIOSItems = objWMIService.ExecQuery("SELECT * FROM Win32_BIOS")
+	For Each objItem In BIOSItems
+		strBIOS=Trim(objItem.Manufacturer)
+		strBIOSver=Trim(objItem.SMBIOSBIOSVersion)
+		strSerialNum=Trim(objItem.SerialNumber)
+		'strBuildNumber=Trim(objItem.BuildNumber)
+		
+	Next
+	
+	GetBios = strBIOS
+	span_serialnum.innerText = strSerialNum
+	'span_buildnumber.innerHTML = strBuildNumber
+	End Function
+ 
+ 
+	//Function GetIE()
+	//Dim oReg
+	//Dim NavParent,PatternDate,NavDir,NavVer,IEVersion,program,installed,Version,ProgramName
+	//strComputer = "."
+	//Set oReg=GetObject("winmgmts:{impersonationLevel=impersonate}!//" & strComputer & "/root/default:StdRegProv")
+	//oReg.getstringvalue 2147483650,"SOFTWARE\Microsoft\Internet Explorer\","Version",IEVersion
+	
+	//GetIE = IEVersion
+	//End Function
+ 
+ 
+ 
+	//Function GetOS()
+	//strComputer = "."
+	//Set wmi = GetObject("winmgmts:{impersonationLevel=impersonate}!//" & strComputer)
+
+	//	For Each Instance in wmi.ExecQuery("Select * From Win32_OperatingSystem")
+	//		strCaption = Instance.Caption
+	//		strSP = instance.CSDVersion
+	//		strLB =  StrDateTime(Instance.LastBootUpTime)
+	//	Next
+
+	//GetOS = strCaption
+	//span_ServicePack.innerHTML = strSP
+	//End Function
+
+
+	Function GetDomain()
+	On Error Resume Next
+	Const wbemFlagReturnImmediately = &h10
+	Const wbemFlagForwardOnly = &h20
+	strComputer = "."
+		
+		   Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\CIMV2")
+		   Set colItems = objWMIService.ExecQuery("SELECT * FROM Win32_ComputerSystem", "WQL",wbemFlagReturnImmediately + wbemFlagForwardOnly)
+		
+		   For Each objItem In colItems
+		      strDNSHostname = objItem.DNSHostName
+		      strDomain = objItem.Domain
+		      strManufactuer = objItem.Manufacturer
+		      strmodelo = objItem.Model
+		      strPrimaryOwner = objItem.PrimaryOwnerName
+		      strUsername = objItem.UserName
+		   Next
+
+	span_username.innerHTML = strUsername
+	'span_username2.innerHTML = strUsername
+	span_modelo.innerHTML = strmodelo
+	GetDomain = strDomain
+	End Function
+
+	Function GetChassitype()
+	strComputer = "."
+	Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\CIMV2")
+	Set ChassisItems = objWMIService.ExecQuery("Select ChassisTypes from Win32_SystemEnclosure")
+	For Each objItem In ChassisItems
+		For j = Lbound(objItem.ChassisTypes) To UBound(objItem.ChassisTypes)
+			varChassisType = objItem.ChassisTypes(j)
+		Next
+		
+		Select Case varChassisType
+			Case 1       
+				strChassisType = "Other"
+			Case 2
+				strChassisType = "Unknown"
+			Case 3
+            	strChassisType = "Desktop"
+        	Case 4
+           		strChassisType = "Low-profile desktop"
+        	Case 5
+            	strChassisType = "Pizza box"
+        	Case 6
+            	strChassisType = "Mini tower"
+        	Case 7
+	            strChassisType = "Tower"
+        	Case 8
+             	strChassisType = "Portable"
+        	Case 9
+	            strChassisType = "Laptop"
+        	Case 10
+	            strChassisType = "Notebook"
+        	Case 11
+	            strChassisType = "Hand-held"
+        	Case 12
+				strChassisType = "Docking station"
+        	Case 13
+	            strChassisType = "All-in-one"
+        	Case 14
+	            strChassisType = "Subnotebook"
+        	Case 15
+	            strChassisType = "Space-saving"
+        	Case 16
+	            strChassisType = "Lunch box"
+        	Case 17
+	            strChassisType = "Main system chassis"
+        	Case 18
+	            strChassisType = "Expansion chassis"
+        	Case 19
+	            strChassisType = "Subchassis"
+        	Case 20
+	            strChassisType = "Bus-expansion chassis"
+        	Case 21
+	            strChassisType = "Peripheral chassis"
+        	Case 22
+	            strChassisType = "Storage chassis"
+        	Case 23
+	            strChassisType = "Rack-mounted chassis"
+        	Case 24
+	            strChassisType = "Sealed-case computer"
+	 	End Select
+ 	Next
+
+	GetChassitype = strChassisType
+	End Function	
+
+	
+' Support Functions
+
+Function StrDateTime(d)
+	Dim strVal,strDate,strTime
+	strVal = CStr(d)
+	strDate = DateSerial(Left(strVal, 4), _
+	Mid(strVal, 5, 2), _
+	Mid(strVal, 7, 2))
+	strTime = TimeSerial(Mid(strVal, 9, 2), _
+	Mid(strVal, 11, 2), _
+	Mid(strVal, 13, 2))
+	StrDateTime = strDate + strTime
+End Function	
+	
+	
+	//EXIT
+	Sub Exit_HTA
+		window.close
+	End Sub
+	
+	
+	//ENVIAR EMAIL PARA SUPORTE
+	Set objNetwork = CreateObject("WScript.Network")
+	strUsername = objNetwork.UserName
+	strDomainName = objNetwork.UserDomain
+	strCompName = UCase(objNetwork.ComputerName)
+
+	Set objLDAPUser = GetObject("LDAP://" & GetUserDN(strUsername,strDomainName))	
+
+	Function GetUserDN(BYVAL UN, BYVAL DN)
+	Set objTrans = CreateObject("NameTranslate")
+		objTrans.init 1, DN
+		objTrans.set 3, DN & "\" & UN
+		strUserDN = objTrans.Get(1)
+		GetUserDN = strUserDN
+	End Function
+
+	Sub enviar_email		
+    Set OutApp = CreateObject("Outlook.Application")
+    Set OutMail = OutApp.CreateItem(0)
+        With OutMail
+            .To = "nelson.costa@soccsantos.pt"
+            .CC = ""
+            .Subject = "" & UCase(strCompName) & " | " & objLDAPUser.DisplayName & " | Resumo:"
+            .Body = "Informações automáticas:(não apagar)" & vbCrLf & _
+                    "---Nome do PC: " & UCase(strCompName) & vbCrLf & _
+					"---Utilizador: " & objLDAPUser.DisplayName & vbCrLf & _
+                    "#relate " & UCase(strCompName) & vbCrLf & vbCrLf & _
+                    "Descreva da melhor forma o seu problema, caso necessário anexe imagens." & vbCrLf & _
+                    "Obrigado" & vbCrLf & vbCrLf & _
+					"Problema:"
+            .Display
+        End With
+        On Error GoTo 0
+        Set OutMail = Nothing
+        Set OutApp = Nothing	
+	End Sub
+</script>
+
+</head>
+
+<body>
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="650">
+<tr valign="top">
+  <td align="right" colspan="2"><!--<span class="head">version:1.3</span><br>--></td>
+</td>
+</tr>
+
+<tr valign="top">
+  <td colspan="2">
+    &nbsp; <span class="tabs tabs1" id="tab1" onclick="panel(1)">Geral</span>
+    &nbsp; <span class="tabs tabs0" id="tab2" onclick="panel(2)">Rede</span>
+    &nbsp; <span class="tabs tabs0" id="tab3" onclick="panel(3)">Hardware</span>
+    &nbsp; <span class="tabs tabs0" id="tab4" onclick="panel(4)">Software</span>
+    &nbsp; <span class="tabs tabs0" id="tab5" onclick="panel(5)">Bloqueada</span>
+	
+    <div class="panel" id="panel1" style="display:block">
+      <hr color="black">
+        <table border="0" width="100%">
+        <tr valign="top">
+          <td>
+            <!--<span class="head">Geral</span>-->
+            <table align="center" border="0" width="100%">
+			
+	<tr>
+	<td style="height: 30px" class="style2">Departamento Infomática - SocCSantos SA</td>
+	</tr>
+	<tr>
+	<td class="style3">Deixe <a href="mailto:nelson.costa@soccsantos.pt?Subject=Suporte%20Sugestões" target="_top">aqui</a> as suas sugestões.</td>
+	</tr>
+</table>
+
+<table width= "90%" border="0" align="center">
+		<tr>
+		<td>Nome do Computador:</td>
+		<td><span><script type="text/javascript"> document.write(computername());</script></span></td>
+		</tr>
+		
+		<tr>
+		<td>Conta de Utilizador:</td>
+		<td><span><script type="text/javascript"> document.write(username());</script></span></td>
+		</tr>
+		
+		<tr>
+		<td>IP:</td>
+		<td><span><script type="text/javascript"> document.write(ip);</script></span></td>
+		</tr>
+		
+		<tr>
+		<td>MAC Ligado:</td>
+		<td><span><script type="text/javascript"> document.write(mac);</script></span></td>
+		</tr>
+</table>
+<hr>
+<center>	
+<table width= "90%" border="0" align="center">
+	<tr>
+	<td><button class="button button5" onclick="faq()" value="FAQ SCCS">FAQ - Duvidas</button></td>
+	<td><button class="button button5" onclick="painelcrm()" value="PAINEL CRM">Painel CRM</button></td>
+	</tr>
+
+	<tr>
+	<td><button class="button button5" onclick="tickets()" value="SPICEWORKS">Consultar Ticket</button></td>
+	<td><button class="button button5" onclick="externocrm()" value="EXTERNO CRM">Externo CRM</button></td>
+	</tr>
+	
+	<tr>
+	<td><button class="button button5" onclick="faq_excel()" value="PAINEL CRM">Dr. Excel</button></td>
+	<td><button class="button button5" onclick="faq_recuperar()" value="PASS CRM RECOVER">Pass Recover</button></td>
+	</tr>
+	
+	<tr>
+	<td><button class="button button5" onclick="impressoras()" value="INSTALAR IMPRESSORAS" target="_blank">Instalar Impressoras</td>
+	<td><button class="button button5" onclick="faq_impressoras()" value="MANUAL">Manual</button></td>
+	</tr>
+</table>
+</center>
+	<br>
+	<table width= "100%" border="0" align="center">
+		<tr align="center">
+			<td>
+				<button class="button button1" name="btn_ticket" id="btn_ticket" accessKey="c" onclick="vbs:enviar_email">CRIAR TICKET</button>
+				&nbsp;	&nbsp;	&nbsp;
+				<button class="button button1" name="btn_exit" id="btn_exit" accessKey="x" onclick="vbs:Exit_HTA">SAIR</button>
+			</td>
+		</tr>
+	</table>
+          </td>
+        </tr>
+        </table>
+    </div>
+    <div class="panel" id="panel3" style="display:none">
+      <hr color="black">
+        <table border="0" width="100%">
+        <tr valign="top">
+          <td>
+            <!--<span class="head">aqui vai ser listado o hardware</span>
+            <br><br>-->
+            <tr>
+			<td class="style1">HARDWARE</td>
+			<td class="style1">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			<td>Fabricante:</td>
+			<td><span id="span_Bios"></span></td>
+			</tr>
+			
+			<tr>
+			<td>Modelo:</td>
+			<td><span id="span_modelo"></span>&nbsp;</td>
+			</tr>
+			
+			<tr>
+			<td>Número de Serie:</td>
+			<td><span id="span_serialnum"></span></td>
+			</tr>
+			
+			<tr>
+			<td>Tipo:</td>
+			<td><span id="span_PCType"></span>&nbsp;</td>
+			</tr>
+
+          </td>
+        </tr>
+        </table>
+    </div>
+	
+<!-- PAINEL 4 -->
+    <div class="panel" id="panel4" style="display:none">
+      <hr color="black">
+        <table border="0" width="100%">
+
+        <tr valign="top">
+        <td><!--<span class="head">aqui vai ser listado software</span><br><br>-->
+		<tr>
+		<td class="style1">SOFTWARE</td>
+		<!--<td class="style1"></td>-->
+		</tr>	
+		<!--
+		<tr>
+		<td>Sistema Operativo:</td>
+		<td><span id="span_OS">&nbsp;</td>
+		</tr>
+		
+		<tr>
+		<td>Service Pack:</td>
+		<td><span id="span_ServicePack"></span>&nbsp;</td>
+		</tr>
+		
+		<tr>
+		<td>Internet Explorer Versão:</td>
+		<td><span id=""></span></td>
+		</tr>
+		-->
+		</td>
+        </tr>
+        </table>
+		
+		
+		<div id=DataAreaNL></div>
+			<SCRIPT Language="VBScript">
+			Set dtmConvertedDate = CreateObject("WbemScripting.SWbemDateTime")
+ 
+			strComputer = "."
+			Set objWMIService = GetObject("winmgmts:" _
+			& "{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2")
+ 
+			Set colOperatingSystems = objWMIService.ExecQuery _
+			("Select * from Win32_OperatingSystem")
+ 
+			For Each objOperatingSystem in colOperatingSystems
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Boot Device: " & objOperatingSystem.BootDevice & "<br>"
+			DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Windows: " & objOperatingSystem.Caption & "<br>"
+			DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Compilação do SO: " & objOperatingSystem.BuildNumber & "<br>"
+			DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Versão: " & objOperatingSystem.Version & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Build Type: " & objOperatingSystem.BuildType & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Code Set: " & objOperatingSystem.CodeSet & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Country Code: " & objOperatingSystem.CountryCode & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Debug: " & objOperatingSystem.Debug & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Encryption Level: " & objOperatingSystem.EncryptionLevel & "<br>"
+			dtmConvertedDate.Value = objOperatingSystem.InstallDate
+			dtmInstallDate = dtmConvertedDate.GetVarDate
+			DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Data de Instalação: " & dtmInstallDate  & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Licensed Users: " & objOperatingSystem.NumberOfLicensedUsers & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Organization: " & objOperatingSystem.Organization & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"OS Language: " & objOperatingSystem.OSLanguage & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"OS Product Suite: " & objOperatingSystem.OSProductSuite & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"OS Type: " & objOperatingSystem.OSType & "<br>"
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Primary: " & objOperatingSystem.Primary & "<br>"
+			DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Utilizador de Instalação: " & objOperatingSystem.RegisteredUser & "<br>"
+			DataAreaNL.InnerHTML=DataAreaNL.InnerHTML &"Numero de Série: " & objOperatingSystem.SerialNumber & "<br>"
+			
+			Next
+ 
+			Set WshShell = CreateObject("WScript.Shell")
+			OsType = WshShell.RegRead("HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\PROCESSOR_ARCHITECTURE")
+ 
+			If OsType = "x86" then
+			DataAreaNL.InnerHTML=DataAreaNL.InnerHTML & "Arquitectura: 32bit detectado" & "<BR>"
+			elseif OsType = "AMD64" then
+			DataAreaNL.InnerHTML=DataAreaNL.InnerHTML & "Arquitectura: 64bit detectado" & "<BR>"
+			end if
+ 
+			//DataAreaNL.InnerHTML=DataAreaNL.InnerHTML & GetObject("winmgmts:root\cimv2:Win32_Processor='cpu0'").AddressWidth & "<BR>"
+			</SCRIPT>
+			
+    </div>
+	
+<!-- PAINEL 2 AKA REDE -->	
+    <div class="panel" id="panel2" style="display:none">
+      <hr color="black">
+        <table border="0" width="100%">
+        <tr valign="top">
+          <td>
+            <!--
+			<span class="head">This is Tab 3.</span>
+            <br><br>
+			-->
+            <table width= "100%" border="0" align="center">
+			<tr>
+			<td class="style1">REDE</td>
+			<td class="style1">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			<td>Nome de Computador:</td>
+			<td><span id="span_computername"></span></td>
+			</td>
+		
+			<tr>
+			<td>Conta de Utilizador:</td>
+			<td><span id="span_username"></span></td>
+			</tr>
+			
+			<tr>
+			<td>Domínio:</td>
+			<td><span id="span_Dominio">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			<td>Servidor Logon:<td>
+				<span id="span_logonserver">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			<td>Endereço IP:</td>
+			<td><span id="span_ipaddress"></span></td>
+			</tr>
+			
+			<tr>
+			<td>Mascara de Rede:</td>
+			<td><span id="span_subnetmask"></span></td>
+			</tr>
+			
+			<tr>
+			<td>Gateway:</td>
+			<td><span id="span_defaultgateway"></span></td>
+			</tr>
+			
+			<tr>
+			<td>DNS Primário:</td>
+			<td><span id="span_primarydns"></span></td>
+			</tr>
+			
+			<tr>
+			<td>DNS Secundário:</td>
+			<td><span id="span_secondarydns"></span></td>
+			</tr>
+        </table>
+    </div>
+	
+<!-- PAINEL 5, VAZIO-->	
+    <div class="panel" id="panel5" style="display:none">
+      <hr color="black">
+        <table border="0" width="100%">
+        <tr valign="top">
+          <td>
+            <span class="head">tab 5 em construção</span>
+            <br><br>
+            Será que irei usar esta tab algum dia? Não perca o proximo episódio pq nós tb não!
+			<br>
+			(づ｡◕‿‿◕｡)づ
+			<br>
+			(ಥ﹏ಥ)
+			<br>
+			[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]
+			<br>
+			♥‿♥
+			<br>
+			~(˘▾˘~)
+			<br>
+			(•_•) ( •_•)>⌐■-■ (⌐■_■)
+			<br>
+			｡◕‿‿◕｡
+          </td>
+        </tr>
+        </table>
+    </div>
+  </td>
+</tr>
+</table>
+</body>
+<!--
+hmmm estou em pulgas até que alguem abra o script e venha cá bisbilhotar :)
+só espero é que comentem o quanto bom isto está em vez de bla bla bla bla 
+o bla bla bla bla bla toda a gente faz :) assim como desculpas, agora o fazer :)
+claro que ia colocar isto no fim XD
+-->
+</html>
