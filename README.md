@@ -1,39 +1,40 @@
-Hi guys, this .hta script its very usefull for IT guys whe you have to helpdesk.
-
-The tool provides useful tabs with general information, network, software, hardware and more, some of those will be more specific to computers.
-However, the first tab, General, contains information that users need when contacting IT support like cumputaer name and username.
-
-It also has 8 or 12 useful links, those likes you can use as you wish, in my case I used to give helpfull links.
-Contais 2 buttons, exit button and send an ticket.
-
-The script provides:
-NETWORK
-Computer name
-User Account
-Domain
-Server Logon
-IP
-Network Mask
-Gateway
-DNS 1
-DNS 2
-
-HARDWARE
-Manufacturer
-Model
-Serial Number
-Type
-
-Software
-Windwons version
-SO Compile
-Version
-Instalation date
-Instalation user
-SO serial number
-Manufacturer
-
-There are more hidden commands :)
-
-
- 
+<p>Hi guys, this .hta script its very usefull for IT guys when come to time for helpdesk.</p>
+<p>The tool provides <strong>useful tabs</strong> with general information, network, software, hardware and more, some of those will be more specific to computers. However, the first tab, General, contains information that users need when contacting IT support like cumputaer name and username.</p>
+<p>It also has<strong> 8 or 12 useful links</strong>, those likes you can use as you wish, in my case I used to give helpfull links. Contais 2 buttons, exit button and <strong>send an ticket</strong>.</p>
+<p>The script provides:</p>
+<ul>
+<li><strong>NETWORK</strong>
+<ul>
+<li>Computer name</li>
+<li>User Account</li>
+<li>Domain</li>
+<li>Server Logon</li>
+<li>IP</li>
+<li>Network Mask</li>
+<li>Gateway</li>
+<li>DNS 1</li>
+<li>DNS 2</li>
+</ul>
+</li>
+<li><strong>HARDWARE</strong>
+<ul>
+<li>Manufacturer</li>
+<li>Model</li>
+<li>Serial Number</li>
+<li>Type<br /><br /></li>
+</ul>
+</li>
+<li><strong>SOFTWARE</strong>
+<ul>
+<li>Windows version</li>
+<li>SO Compile</li>
+<li>Version</li>
+<li>Instalation Date</li>
+<li>Instalation User</li>
+<li>SO serial number</li>
+<li>Manufacturer</li>
+<li>Architecture</li>
+</ul>
+</li>
+</ul>
+<p>There are more hidden commands :)</p>
