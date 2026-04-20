@@ -1,44 +1,50 @@
-<p>Hi guys, this .hta script its very usefull for IT guys when come to time for helpdesk.</p>
-<p><img src="https://www.nelsoncosta.ovh/publico/geral.JPG" alt="general" width="702" height="577" /></p>
-<p>The tool provides <strong>useful tabs</strong> with general information, network, software, hardware and more, some of those will be more specific to computers. However, the first tab, General, contains information that users need when contacting IT support like cumputaer name and username.</p>
-<p>It also has<strong> 8 or 12 useful links</strong>, those likes you can use as you wish, in my case I used to give helpfull links. Contais 2 buttons, exit button and <strong>send an ticket</strong>.</p>
-<p>The script provides:</p>
-<ul>
-<li><strong>NETWORK</strong>
-<ul>
-<li>Computer name</li>
-<li>User Account</li>
-<li>Domain</li>
-<li>Server Logon</li>
-<li>IP</li>
-<li>Network Mask</li>
-<li>Gateway</li>
-<li>DNS 1</li>
-<li>DNS 2</li>
-</ul>
-</li>
-<li><strong>HARDWARE</strong>
-<ul>
-<li>Manufacturer</li>
-<li>Model</li>
-<li>Serial Number</li>
-<li>Type<br /><br /></li>
-</ul>
-</li>
-<li><strong>SOFTWARE</strong>
-<ul>
-<li>Windows version</li>
-<li>SO Compile</li>
-<li>Version</li>
-<li>Instalation Date</li>
-<li>Instalation User</li>
-<li>SO serial number</li>
-<li>Manufacturer</li>
-<li>Architecture</li>
-</ul>
-</li>
-</ul>
-<p>There are more hidden commands :)</p>
-<p><img src="https://www.nelsoncosta.ovh/publico/hard.JPG" alt="HARDWARE" width="697" height="569" /></p>
-<p><img src="https://www.nelsoncosta.ovh/publico/rede.JPG" alt="NETWORD" width="697" height="569" /></p>
-<p><img src="https://www.nelsoncosta.ovh/publico/soft.JPG" alt="SOFTWARE" width="697" height="569" /></p>
+# IT Support Tool v1.6
+
+### Portugues (PT-PT)
+
+**O que e este projeto?**
+Esta e uma ferramenta de suporte de TI baseada em HTA (HTML Application), desenhada para ser leve, funcional e extremamente util no dia-a-dia de equipas de Helpdesk e Administradores de Sistemas. 
+
+**Para quem e?**
+Este projeto e 100% GRATUITO e de codigo aberto. Foi criado para que empresas e profissionais de TI possam utilizar, adaptar e distribuir livremente nos seus parques informaticos para facilitar a gestao e a resolucao de incidentes.
+
+**Principais Funcionalidades:**
+- **Informacao Geral:** Visualizacao rapida do nome do computador, utilizador ligado, endereco IP e MAC.
+- **Gestao de Rede:** Consulta de Mascara de Rede, Gateway e servidores DNS.
+- **Inventario de Hardware:** Detalhes do fabricante, modelo, numero de serie e tipo de chassis.
+- **Diagnostico de Software:** Informacoes sobre a versao do Windows, compilacao, data de instalacao e arquitetura.
+- **Atalhos Rapidos:** 8 botoes totalmente personalizaveis para links externos ou ferramentas internas.
+- **Criacao de Tickets:** Integracao com Outlook para envio automatico de resumos tecnicos ao suporte.
+
+---
+
+### English
+
+**What is this project?**
+This is an IT support tool built as an HTA (HTML Application), designed to be lightweight, functional, and extremely useful for Helpdesk teams and System Administrators in their daily tasks.
+
+**Who is it for?**
+This project is 100% FREE and Open Source. It was created so that companies and IT professionals can freely use, adapt, and distribute it across their IT parks to streamline management and incident resolution.
+
+**Main Features:**
+- **General Information:** Quick view of computer name, logged-in user, IP, and MAC address.
+- **Network Management:** Access to Subnet Mask, Gateway, and DNS server details.
+- **Hardware Inventory:** Manufacturer, model, serial number, and chassis type details.
+- **Software Diagnostics:** Information on Windows version, build, installation date, and architecture.
+- **Quick Links:** 8 fully customizable buttons for external resources or internal tools.
+- **Ticket Creation:** Outlook integration to automatically send technical summaries to support teams.
+
+---
+
+## Como usar / How to use
+
+1. Clone o repositorio / Clone the repository.
+2. Edite o ficheiro Support.hta para personalizar os links e o e-mail de suporte (Procure por link1 e support@yourcompany.com).
+3. Execute o Support.hta em qualquer maquina Windows.
+
+## Licenca / License
+
+Este projeto esta licenciado sob a Licenca MIT - veja o ficheiro [LICENSE](LICENSE) para mais detalhes.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Developed by [Nelson Costa](https://github.com/nelsondcosta23)
